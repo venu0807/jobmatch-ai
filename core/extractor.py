@@ -3,7 +3,10 @@ import re
 from pathlib import Path
 import pypdf
 
-DEFAULT_RESUME_PATH = r"D:\V\VenuGopalReddy-PythonFSD-Resume.pdf"
+BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_PDF_PATH = BASE_DIR / "data" / "default_resume.pdf"
+PROJECT_TXT_PATH = BASE_DIR / "data" / "default_resume.txt"
+LOCAL_WINDOWS_PATH = Path(r"D:\V\VenuGopalReddy-PythonFSD-Resume.pdf")
 
 def clean_extracted_text(text: str) -> str:
     """
@@ -50,21 +53,61 @@ def extract_text_from_pdf_bytes(pdf_bytes: bytes) -> str:
 
 def get_default_resume_text() -> dict:
     """
-    Attempts to read the default resume from D:\\V\\...
-    Returns {'success': bool, 'text': str, 'path': str, 'error': str}
+    Attempts to read the default resume from:
+    1. Bundled data/default_resume.pdf (works in Docker / Render / Cloud)
+    2. Bundled data/default_resume.txt (fast clean text fallback)
+    3. Local Windows D:\\V\\VenuGopalReddy-PythonFSD-Resume.pdf
     """
-    try:
-        txt = extract_text_from_pdf_file(DEFAULT_RESUME_PATH)
-        return {
-            "success": True,
-            "text": txt,
-            "path": DEFAULT_RESUME_PATH,
-            "filename": Path(DEFAULT_RESUME_PATH).name
-        }
-    except Exception as e:
-        return {
-            "success": False,
-            "text": "",
-            "path": DEFAULT_RESUME_PATH,
-            "error": str(e)
-        }
+    # 1. Bundled project PDF
+    if PROJECT_PDF_PATH.exists():
+        try:
+            txt = extract_text_from_pdf_file(str(PROJECT_PDF_PATH))
+            if txt:
+                return {
+                    "success": True,
+                    "text": txt,
+                    "path": "VenuGopalReddy-PythonFSD-Resume.pdf",
+                    "filename": "VenuGopalReddy-PythonFSD-Resume.pdf"
+                }
+        except Exception:
+            pass
+
+    # 2. Bundled clean text
+    if PROJECT_TXT_PATH.exists():
+        try:
+            with open(PROJECT_TXT_PATH, "r", encoding="utf-8") as f:
+                txt = f.read().strip()
+            if txt:
+                return {
+                    "success": True,
+                    "text": txt,
+                    "path": "VenuGopalReddy-PythonFSD-Resume.pdf",
+                    "filename": "VenuGopalReddy-PythonFSD-Resume.pdf"
+                }
+        except Exception:
+            pass
+
+    # 3. Local Windows absolute path fallback
+    if LOCAL_WINDOWS_PATH.exists():
+        try:
+            txt = extract_text_from_pdf_file(str(LOCAL_WINDOWS_PATH))
+            return {
+                "success": True,
+                "text": txt,
+                "path": str(LOCAL_WINDOWS_PATH),
+                "filename": LOCAL_WINDOWS_PATH.name
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "text": "",
+                "path": str(LOCAL_WINDOWS_PATH),
+                "error": str(e)
+            }
+
+    return {
+        "success": False,
+        "text": "",
+        "path": "default_resume.pdf",
+        "error": "Default resume file not found. Please upload your PDF resume."
+    }

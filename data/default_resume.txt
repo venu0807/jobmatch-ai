@@ -1,0 +1,45 @@
+VENU GOP AL REDDY P ALUGULLA
+Python Full Stack Developer
+pvgreddy3@gmail.com github.com/venu0807 linkedin.com/in/venu0807/ leetcode.com/u/venu08/
+venureddy .vercel.app/ +91 6309343563 Gurugram, India / Open to Relocate (Immediate Joiner)
+PROFESSIONAL SUMMARY
+Python Full Stack Developer with hands-on experience building ML-integrated recommendation engine serving 10,000+ records with 60% query latency reduction, and a CNN audio classification system achieving
+89% accuracy at sub-100ms edge inference. Ranked T op 8% of 250,000 nationally in AlgoUniversity T ech
+Fellowship. 500+ LeetCode problems solved.
+TECHNICAL SKILLS
+Programming Languages: Python, Java, JavaScript (ES6+), SQL.
+Backend: Django, Django REST Framework (DRF), REST APIs, JWT Authentication, Django ORM.
+Frontend: React.js, HTML5, CSS3, Bootstrap, Responsive UI.
+Databases & Caching: PostgreSQL, MySQL, Redis, Schema Design, Query Optimization, B-tree Indexing.
+Machine Learning: T ensorFlow, TFLite, Scikit-learn, CNN, Pandas, NumPy , Feature Engineering.
+DevOps & Tools: PyT est, Docker, Docker Compose, Git, GitHub, GitHub Actions, CI/CD Pipelines.
+TECHNICAL PROJECTS
+Movie Recommendation Platform - Full Stack Python Developer 2024 - 2025
+• Built an end-to-end ML-powered recommendation engine using content-based filtering (Pandas, Scikitlearn), serving personalized results through a Django REST Framework backend and React.js frontend.
+• Designed a normalized PostgreSQL schema for 10,000+ records; applied Redis caching with B-tree indexing, reducing query latency by 60%.
+AI-Driven Audio Triggered Threat Detection - Backend and Android Developer 2025 - 2026
+• Architected a CNN-based real-time audio classification pipeline using T ensorFlow, achieving 89% accuracy;
+deployed on Android via TFLite with sub-100ms on-device inference.
+• Built automated SMS emergency alerts with live GPS location sharing, triggered on detection events for
+real-time emergency response.
+Automation Platform - Python Developer 2025 - 2026
+• Engineered a personal automation platform using Python and Playwright bots for system monitoring, health
+checks, and alert management, with shared libraries for code reuse across bots.
+• Reduced manual job-search effort from hours to minutes per day , logging 200+ applications in the first
+month via automated job.applied events published to an event bus for downstream bots.
+EDUCATION
+Master of Computer Applications (AI & Machine Learning) — Galgotias University 2024 - 2026
+CGP A: 7.46/10 | Coursework: Python, ML, Deep Learning, Artificial Intelligence, DSA.
+Bachelor of Computer Science — Chaudhary Charan Singh University 2019 - 2022
+Score: 85% | Coursework: Database Management System, Programming Fundamentals.
+PROFESSIONAL TRAINING
+Full Stack Python Developer Program - Besant T echnologies 2023 - 2024
+Completed 400+ hours of project-based training in Python, Django, DRF , React.js, and MySQL; delivered 3+
+full-stack applications integrating ML models with production-ready APIs and frontends.
+Digital Skills Readiness Program, Java Full Stack - Wipro T alentNext July 2025 - Oct 2025
+Enterprise curriculum covering Java, Object-Oriented Programming (OOP), Data Structures & Algorithms,
+MySQL, and scalable API design with emphasis on algorithms and system architecture.
+Achievements & Certifications
+Solved 500+ LeetCode problems , using Sliding Window, T wo Pointers, and Hash T ables.
+Ranked top 8% of 250,000 participants nationally — AlgoUniversity T ech Fellowship 2025.
+NPTEL: Artificial Intelligence — Concepts and Techniques — IIT/AICTE Recognized.
