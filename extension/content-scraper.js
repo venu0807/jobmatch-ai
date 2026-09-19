@@ -22,11 +22,13 @@
     {
       domain: "linkedin.com",
       desc: [
+        "#job-details",
         ".jobs-description__content",
+        ".jobs-description-content__text",
         ".jobs-box__html-content",
         ".jobs-description",
-        "#job-details",
-        "article.jobs-description__container"
+        "article.jobs-description__container",
+        ".jobs-search__job-details--container"
       ],
       title: [
         ".job-details-jobs-unified-top-card__job-title",
