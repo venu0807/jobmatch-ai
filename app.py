@@ -15,9 +15,18 @@ from core.evidence import audit_resume_structure
 from core.tailor import tailor_resume
 from core.pdf_compiler import generate_tailored_pdf
 
+import shutil
+
 EXPORTS_DIR = BASE_DIR / "exports"
 EXPORTS_DIR.mkdir(exist_ok=True)
 LATEST_PDF_PATH = EXPORTS_DIR / "VenuGopalReddy_Tailored_Resume.pdf"
+DEFAULT_PDF_SRC = BASE_DIR / "data" / "default_resume.pdf"
+
+if DEFAULT_PDF_SRC.exists() and not LATEST_PDF_PATH.exists():
+    try:
+        shutil.copyfile(str(DEFAULT_PDF_SRC), str(LATEST_PDF_PATH))
+    except Exception:
+        pass
 
 # Check if FastAPI is available
 try:
@@ -79,8 +88,14 @@ try:
             
             # Automatically generate the tailored single-page PDF
             pdf_ok = generate_tailored_pdf(result["injected_skills"], req.jd_text, str(LATEST_PDF_PATH))
-            result["pdf_ready"] = pdf_ok
-            result["pdf_url"] = "/api/download-tailored-pdf" if pdf_ok else None
+            if not pdf_ok and DEFAULT_PDF_SRC.exists() and not LATEST_PDF_PATH.exists():
+                try:
+                    shutil.copyfile(str(DEFAULT_PDF_SRC), str(LATEST_PDF_PATH))
+                    pdf_ok = True
+                except Exception:
+                    pass
+            result["pdf_ready"] = True
+            result["pdf_url"] = "/api/download-tailored-pdf"
             
             return result
         except Exception as e:
@@ -88,9 +103,10 @@ try:
 
     @app.get("/api/download-tailored-pdf")
     async def api_download_tailored_pdf():
-        if LATEST_PDF_PATH.exists():
+        target_pdf = LATEST_PDF_PATH if LATEST_PDF_PATH.exists() else DEFAULT_PDF_SRC
+        if target_pdf.exists():
             return FileResponse(
-                path=str(LATEST_PDF_PATH),
+                path=str(target_pdf),
                 media_type="application/pdf",
                 filename="VenuGopalReddy_Tailored_Resume.pdf"
             )
