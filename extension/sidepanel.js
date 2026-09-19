@@ -210,6 +210,24 @@ async function runMatchAnalysis() {
     });
 
     if (!res.ok) {
+      if (res.status === 502 || res.status === 503) {
+        showStatus("Cloud server waking up... retrying in 3s", "error", 4000);
+        await new Promise(r => setTimeout(r, 3000));
+        const retryRes = await fetch(`${currentServerUrl}/api/analyze`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            resume_text: cachedResumeText,
+            jd_text: jdText
+          })
+        });
+        if (retryRes.ok) {
+          const data = await retryRes.json();
+          latestMatchData = data;
+          renderMatchResults(data);
+          return;
+        }
+      }
       throw new Error(`Server returned ${res.status}`);
     }
 
