@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobMatch AI Side Panel</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+
+  <!-- Top Header & Server Toggle -->
+  <header class="header">
+    <div class="brand">
+      <img src="icons/icon-48.png" alt="Logo" class="brand-icon">
+      <span class="brand-title">JobMatch AI</span>
+    </div>
+    <div id="serverToggle" class="server-toggle" title="Click to toggle between Cloud and Localhost backend">
+      <span id="serverDot" class="server-dot"></span>
+      <span id="serverLabel">Cloud</span>
+    </div>
+  </header>
+
+  <!-- Status Alert Banner -->
+  <div id="statusAlert" class="status-msg hidden"></div>
+
+  <!-- 1. Job Description Ingestion Card -->
+  <section class="card">
+    <button id="btnExtractTab" class="btn btn-extract">
+      <span>⚡ 1-Click Extract from Active Tab</span>
+    </button>
+    
+    <div class="jd-preview-container">
+      <div class="jd-meta">
+        <span id="jobMetaTitle">Target Job Description</span>
+        <span id="jobMetaLength">0 words</span>
+      </div>
+      <textarea id="txtJobDescription" class="jd-textarea" placeholder="Click 'Extract from Active Tab' on LinkedIn / Naukri, or paste the job description text here..."></textarea>
+    </div>
+
+    <div style="margin-top: 8px;">
+      <button id="btnAnalyze" class="btn btn-primary">
+        <span>🔍 Run ATS Match Analysis</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 2. Match Results Section (Hidden until analyzed) -->
+  <section id="resultsSection" class="card hidden">
+    <div class="score-container">
+      
+      <!-- Circular SVG Gauge -->
+      <div class="gauge-wrapper">
+        <svg class="gauge-svg">
+          <circle cx="40" cy="40" r="36" class="gauge-bg" />
+          <circle id="gaugeCircle" cx="40" cy="40" r="36" class="gauge-bar" />
+        </svg>
+        <span id="scorePercentage" class="gauge-text">0%</span>
+      </div>
+
+      <!-- Score Breakdown -->
+      <div class="score-details">
+        <span id="matchBadge" class="rating-badge">Analyzing...</span>
+        <div class="sub-metrics">
+          <span>Overlap: <strong id="skillCoverageText">0%</strong></span>
+          <span>Semantic: <strong id="semanticText">0%</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Matched Skills -->
+    <div class="tags-section">
+      <div class="tags-header">
+        <span>🟢 Matched Skills</span>
+        <span id="matchedCount">0</span>
+      </div>
+      <div id="matchedList" class="tags-list"></div>
+    </div>
+
+    <!-- Missing Skills -->
+    <div class="tags-section">
+      <div class="tags-header">
+        <span>🔴 Missing Requirements</span>
+        <span id="missingCount">0</span>
+      </div>
+      <div id="missingList" class="tags-list"></div>
+    </div>
+
+    <!-- Tailor Trigger Button inside results -->
+    <div style="margin-top: 12px;">
+      <button id="btnAutoTailor" class="btn btn-extract">
+        <span>✨ Auto-Tailor Master Resume</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 3. Tailor & PDF Download Section (Hidden until tailored) -->
+  <section id="tailorSection" class="tailor-card hidden">
+    <div class="tailor-delta-row">
+      <div style="font-weight: 700; font-size: 12px; color: #fff;">
+        Projected: <span id="projectedScoreText" style="color: #34d399;">0%</span>
+      </div>
+      <span id="deltaBadge" class="delta-badge">+0% Boost</span>
+    </div>
+
+    <div class="tags-section" style="margin-top: 0; margin-bottom: 10px;">
+      <div class="tags-header">
+        <span>🟢 Injected Technical Keywords</span>
+        <span id="injectedCount">0 added</span>
+      </div>
+      <div id="injectedList" class="tags-list"></div>
+    </div>
+
+    <!-- 1-Click Action Buttons -->
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <button id="btnDownloadPdf" class="btn btn-success">
+        <span>📥 Download Tailored 1-Page PDF</span>
+      </button>
+
+      <div class="action-grid">
+        <button id="btnCopyDm" class="btn btn-secondary" title="Copy custom LinkedIn DM for the recruiter">
+          <span>📋 Copy Recruiter DM</span>
+        </button>
+        <button id="btnCopyLatex" class="btn btn-secondary" title="Copy Overleaf LaTeX code">
+          <span>📋 Copy LaTeX</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
