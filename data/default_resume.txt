@@ -1,11 +1,12 @@
 VENU GOP AL REDDY P ALUGULLA
 Python Full Stack Developer
 pvgreddy3@gmail.com github.com/venu0807 linkedin.com/in/venu0807/ leetcode.com/u/venu08/
-venureddy .vercel.app/ +91 6309343563 Gurugram, India / Open to Relocate (Immediate Joiner)
+venureddy .vercel.app/ +91 6309343563 Hyderabad, India / Open to Relocate (Immediate Joiner)
 PROFESSIONAL SUMMARY
-Python Full Stack Developer with hands-on experience building ML-integrated recommendation engine serving 10,000+ records with 60% query latency reduction, and a CNN audio classification system achieving
-89% accuracy at sub-100ms edge inference. Ranked T op 8% of 250,000 nationally in AlgoUniversity T ech
-Fellowship. 500+ LeetCode problems solved.
+Python full stack developer with hands-on experience implementing an ML- augmented recommendation
+engine serving over 10,000 records with 60% lower query latency and a CNN audio classification system
+achieving 89% accuracy at under 100ms edge inference. Recognized in the top 8% of 250,000 national
+applicants for the AlgoUniversity T ech Fellowship. Completed more than 500 LeetCode problems.
 TECHNICAL SKILLS
 Programming Languages: Python, Java, JavaScript (ES6+), SQL.
 Backend: Django, Django REST Framework (DRF), REST APIs, JWT Authentication, Django ORM.

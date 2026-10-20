@@ -54,11 +54,35 @@ def extract_text_from_pdf_bytes(pdf_bytes: bytes) -> str:
 def get_default_resume_text() -> dict:
     """
     Attempts to read the default resume from:
-    1. Bundled data/default_resume.pdf (works in Docker / Render / Cloud)
-    2. Bundled data/default_resume.txt (fast clean text fallback)
-    3. Local Windows D:\\V\\VenuGopalReddy-PythonFSD-Resume.pdf
+    1. Local Windows D:\\V\\VenuGopalReddy-PythonFSD-Resume.pdf (Primary master copy)
+    2. Bundled data/default_resume.pdf (works in Docker / Render / Cloud)
+    3. Bundled data/default_resume.txt (fast clean text fallback)
     """
-    # 1. Bundled project PDF
+    # 1. Local Windows master copy (Primary when running natively on host)
+    if LOCAL_WINDOWS_PATH.exists():
+        try:
+            # Auto-sync bundled files if master is newer or bundled missing
+            if not PROJECT_PDF_PATH.exists() or LOCAL_WINDOWS_PATH.stat().st_mtime > PROJECT_PDF_PATH.stat().st_mtime:
+                import shutil
+                shutil.copyfile(str(LOCAL_WINDOWS_PATH), str(PROJECT_PDF_PATH))
+                txt = extract_text_from_pdf_file(str(LOCAL_WINDOWS_PATH))
+                if txt:
+                    with open(PROJECT_TXT_PATH, "w", encoding="utf-8") as f:
+                        f.write(txt)
+            else:
+                txt = extract_text_from_pdf_file(str(LOCAL_WINDOWS_PATH))
+
+            if txt:
+                return {
+                    "success": True,
+                    "text": txt,
+                    "path": str(LOCAL_WINDOWS_PATH),
+                    "filename": LOCAL_WINDOWS_PATH.name
+                }
+        except Exception:
+            pass
+
+    # 2. Bundled project PDF
     if PROJECT_PDF_PATH.exists():
         try:
             txt = extract_text_from_pdf_file(str(PROJECT_PDF_PATH))
@@ -72,7 +96,7 @@ def get_default_resume_text() -> dict:
         except Exception:
             pass
 
-    # 2. Bundled clean text
+    # 3. Bundled clean text
     if PROJECT_TXT_PATH.exists():
         try:
             with open(PROJECT_TXT_PATH, "r", encoding="utf-8") as f:
@@ -86,24 +110,6 @@ def get_default_resume_text() -> dict:
                 }
         except Exception:
             pass
-
-    # 3. Local Windows absolute path fallback
-    if LOCAL_WINDOWS_PATH.exists():
-        try:
-            txt = extract_text_from_pdf_file(str(LOCAL_WINDOWS_PATH))
-            return {
-                "success": True,
-                "text": txt,
-                "path": str(LOCAL_WINDOWS_PATH),
-                "filename": LOCAL_WINDOWS_PATH.name
-            }
-        except Exception as e:
-            return {
-                "success": False,
-                "text": "",
-                "path": str(LOCAL_WINDOWS_PATH),
-                "error": str(e)
-            }
 
     return {
         "success": False,
